@@ -1,21 +1,51 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import thaparLogo from '../assets/Name.png';
-import hostelImage from '../assets/Hostel-M.jpg';
+import thaparLogo from '../Name.png';
+import hostelImage from '../Tiet-Library.png';
+import './Login.css';
 
-const Login = () => {
+const Login = ({ setUserRole }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     name: '',
     role: 'student',
     department: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    resetCode: ''
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('/api/auth/forgot-password', {
+        email: formData.email
+      });
+      setShowForgotPassword(true);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Error sending reset code');
+    }
+  };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('/api/auth/reset-password', {
+        email: formData.email,
+        resetCode: formData.resetCode,
+        newPassword: formData.password
+      });
+      setShowForgotPassword(false);
+      setIsLogin(true);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Error resetting password');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,15 +58,16 @@ const Login = () => {
           password: formData.password,
           role: formData.role
         });
-        localStorage.setItem('token', response.data.token);
         
-        if (response.data.role === 'hod') {
-          navigate('/hod-dashboard');
+        localStorage.setItem('token', response.data.token);
+        setUserRole(formData.role);
+        
+        if (formData.role === 'teacher') {
+          navigate('/teacher-dashboard');
         } else {
           navigate('/student-dashboard');
         }
       } else {
-        // Signup validation
         if (formData.password !== formData.confirmPassword) {
           setError('Passwords do not match');
           return;
@@ -50,135 +81,197 @@ const Login = () => {
           department: formData.department
         });
         
-        // Auto login after signup
-        const loginResponse = await axios.post('/api/auth/login', {
-          email: formData.email,
-          password: formData.password,
-          role: formData.role
-        });
-        
-        localStorage.setItem('token', loginResponse.data.token);
-        navigate(loginResponse.data.role === 'hod' ? '/hod-dashboard' : '/student-dashboard');
+        setIsLogin(true);
       }
     } catch (error) {
       setError(error.response?.data?.message || 'An error occurred');
-      console.error('Auth failed:', error);
     }
   };
 
-  return (
-    <div className="auth-container">
-      <img src={thaparLogo} alt="Thapar Logo" className="thapar-logo" />
-      
-      <div className="auth-content">
-        <div className="image-section">
-          <img src={hostelImage} alt="Thapar Campus" className="campus-image" />
-        </div>
+  if (showForgotPassword) {
+    return (
+      <div className="login-container">
+        <div className="login-form-section">
+          <div className="login-header">
+            <img src="/tiet-logo.png" alt="TIET Logo" className="tiet-logo" />
+            <h1>Reset Password</h1>
+          </div>
 
-        <div className="form-section">
-          <div className="form-container">
-            <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
-            <p className="subtitle">
-              {isLogin 
-                ? 'Sign in to access Thapar Virtual Labs' 
-                : 'Join Thapar Virtual Labs community'}
-            </p>
+          <form onSubmit={handleResetPassword} className="login-form">
+            <div className="form-group">
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                placeholder="Email Address"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <input
+                type="text"
+                value={formData.resetCode}
+                onChange={(e) => setFormData({...formData, resetCode: e.target.value})}
+                placeholder="Reset Code"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                placeholder="New Password"
+                required
+              />
+            </div>
 
             {error && <div className="error-message">{error}</div>}
 
-            <form onSubmit={handleSubmit}>
-              {!isLogin && (
-                <div className="form-group">
-                  <label>Full Name</label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    required={!isLogin}
-                    placeholder="Enter your full name"
-                  />
-                </div>
-              )}
+            <button type="submit" className="login-button">
+              Reset Password
+            </button>
+            <button 
+              type="button" 
+              className="secondary-button"
+              onClick={() => setShowForgotPassword(false)}
+            >
+              Back to Login
+            </button>
+          </form>
+        </div>
+        
+        <div className="login-image-section">
+          <img src={hostelImage} alt="Campus View" className="campus-image" />
+        </div>
+      </div>
+    );
+  }
 
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  required
-                  placeholder="Enter your email"
-                />
-              </div>
+  return (
+    <div className="login-container">
+      <div className="login-form-section">
+        <div className="login-header">
+          <img src="/tiet-logo.png" alt="TIET Logo" className="tiet-logo" />
+          <h1>Virtual Labs Portal</h1>
+          <p>Computer Science and Engineering Department</p>
+        </div>
+        
+        <div className="login-type-toggle">
+          <button 
+            className={isLogin ? 'active' : ''} 
+            onClick={() => setIsLogin(true)}
+          >
+            Login
+          </button>
+          <button 
+            className={!isLogin ? 'active' : ''} 
+            onClick={() => setIsLogin(false)}
+          >
+            Sign Up
+          </button>
+        </div>
 
+        <form onSubmit={handleSubmit} className="login-form">
+          {!isLogin && (
+            <div className="form-group">
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                placeholder="Full Name"
+                required={!isLogin}
+              />
+            </div>
+          )}
+
+          <div className="form-group">
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              placeholder="Email Address"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              placeholder="Password"
+              required
+            />
+          </div>
+
+          {!isLogin && (
+            <>
               <div className="form-group">
-                <label>Password</label>
                 <input
                   type="password"
-                  value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
-                  required
-                  placeholder="Enter your password"
+                  value={formData.confirmPassword}
+                  onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
+                  placeholder="Confirm Password"
+                  required={!isLogin}
                 />
               </div>
 
-              {!isLogin && (
-                <>
-                  <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input
-                      type="password"
-                      value={formData.confirmPassword}
-                      onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-                      required={!isLogin}
-                      placeholder="Confirm your password"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Department</label>
-                    <select
-                      value={formData.department}
-                      onChange={(e) => setFormData({...formData, department: e.target.value})}
-                      required={!isLogin}
-                    >
-                      <option value="">Select Department</option>
-                      <option value="CSED">Computer Science (CSED)</option>
-                      <option value="ECED">Electronics (ECED)</option>
-                      <option value="MECH">Mechanical</option>
-                      <option value="CIVIL">Civil</option>
-                      <option value="CHEM">Chemical</option>
-                    </select>
-                  </div>
-                </>
-              )}
-
               <div className="form-group">
-                <label>Role</label>
                 <select
-                  value={formData.role}
-                  onChange={(e) => setFormData({...formData, role: e.target.value})}
-                  required
+                  value={formData.department}
+                  onChange={(e) => setFormData({...formData, department: e.target.value})}
+                  required={!isLogin}
                 >
-                  <option value="student">Student</option>
-                  <option value="hod">Teacher/HOD</option>
+                  <option value="">Select Department</option>
+                  <option value="CSED">Computer Science Engineering</option>
+                  <option value="ECED">Electronics & Communication</option>
+                  <option value="MECH">Mechanical Engineering</option>
+                  <option value="CIVIL">Civil Engineering</option>
+                  <option value="CHEM">Chemical Engineering</option>
+                  <option value="BIOTECH">Biotechnology</option>
+                  <option value="EE">Electrical Engineering</option>
+                  <option value="MATH">Mathematics</option>
                 </select>
               </div>
+            </>
+          )}
 
-              <button type="submit" className="submit-button">
-                {isLogin ? 'Sign In' : 'Create Account'}
-              </button>
-            </form>
-
-            <div className="auth-switch">
-              {isLogin ? (
-                <p>Don't have an account? <button onClick={() => setIsLogin(false)}>Sign Up</button></p>
-              ) : (
-                <p>Already have an account? <button onClick={() => setIsLogin(true)}>Sign In</button></p>
-              )}
-            </div>
+          <div className="form-group">
+            <select
+              value={formData.role}
+              onChange={(e) => setFormData({...formData, role: e.target.value})}
+              required
+            >
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
           </div>
-        </div>
+
+          {error && <div className="error-message">{error}</div>}
+
+          {isLogin && (
+            <div className="forgot-password">
+              <button 
+                type="button" 
+                onClick={handleForgotPassword}
+                className="link-button"
+              >
+                Forgot Password?
+              </button>
+            </div>
+          )}
+
+          <button type="submit" className="login-button">
+            {isLogin ? 'Login' : 'Sign Up'}
+          </button>
+        </form>
+      </div>
+      
+      <div className="login-image-section">
+        <img src={hostelImage} alt="Campus View" className="campus-image" />
       </div>
     </div>
   );
