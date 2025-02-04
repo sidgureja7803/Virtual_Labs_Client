@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import thaparLogo from '../Name.png';
-import hostelImage from '../Tiet-Library.png';
+import thaparLogo from '../assets/Name.png';
+import hostelImage from '../assets/Hostel-M.jpg';
 import './Login.css';
 
 const Login = ({ setUserRole }) => {
