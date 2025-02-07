@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config'
 
 const HODDashboard = () => {
   const [departments, setDepartments] = useState([]);
@@ -14,7 +15,7 @@ const HODDashboard = () => {
   useEffect(() => {
     // Fetch departments data
     const fetchDepartments = async () => {
-      const response = await axios.get('/api/departments');
+      const response = await axios.get(`${config.apiUrl}/departments`);
       setDepartments(response.data);
     };
     fetchDepartments();
@@ -23,7 +24,7 @@ const HODDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/subjects', formData, {
+      await axios.post(`${config.apiUrl}/subjects`, formData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -56,7 +57,8 @@ const HODDashboard = () => {
             <option value="">Select Department</option>
             <option value="CSED">CSED</option>
             <option value="ECED">ECED</option>
-            {/* Add other departments */}
+            <option value= "EIED"></option>
+            <option value= "Department of Biotechnology"></option>
           </select>
         </div>
 

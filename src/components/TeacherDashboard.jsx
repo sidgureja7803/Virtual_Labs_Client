@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config';
 import '../styles/Dashboard.css';
 
 const TeacherDashboard = () => {
@@ -26,7 +27,7 @@ const TeacherDashboard = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get('/api/departments');
+      const response = await axios.get(`${config.apiUrl}/departments`);
       setDepartments(response.data);
     } catch (error) {
       console.error('Error fetching departments:', error);
@@ -35,7 +36,7 @@ const TeacherDashboard = () => {
 
   const fetchTeacherCourses = async () => {
     try {
-      const response = await axios.get('/api/subjects/teacher', {
+      const response = await axios.get(`${config.apiUrl}/subjects/teacher`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -49,7 +50,7 @@ const TeacherDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/subjects', formData, {
+      await axios.post(`${config.apiUrl}/subjects`, formData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }

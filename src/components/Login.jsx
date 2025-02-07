@@ -3,10 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import thaparLogo from '../Name.png';
 import hostelImage from '../Tiet-Library.png';
+// import {BASE_URL} from '../config';
+import config from '../config';
 import './Login.css';
+const BASE_URL = "http://localhost:3000";
+
 
 const Login = ({ setUserRole }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [showOTPVerification, setShowOTPVerification] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -15,15 +20,18 @@ const Login = ({ setUserRole }) => {
     role: 'student',
     department: '',
     confirmPassword: '',
-    resetCode: ''
+    resetCode: '',
+    otp: ''
   });
+
+  
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/forgot-password', {
+      await axios.post(`${config.apiUrl}/auth/forgot-password`, {
         email: formData.email
       });
       setShowForgotPassword(true);
@@ -35,7 +43,7 @@ const Login = ({ setUserRole }) => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/reset-password', {
+      await axios.post(`${config.apiUrl}/auth/reset-password`, {
         email: formData.email,
         resetCode: formData.resetCode,
         newPassword: formData.password
@@ -47,13 +55,38 @@ const Login = ({ setUserRole }) => {
     }
   };
 
+  const handleOTPVerification = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${config.apiUrl}/auth/verify-otp`, {
+        email: formData.email,
+        otp: formData.otp
+      });
+
+      if (response.data.success) {
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token);
+        }
+        setUserRole(formData.role);
+        
+        if (formData.role === 'teacher') {
+          navigate('/teacher-dashboard');
+        } else {
+          navigate('/student-dashboard');
+        }
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'Invalid OTP');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
       if (isLogin) {
-        const response = await axios.post('/api/auth/login', {
+        const response = await axios.post(`${config.apiUrl}/auth/login`, {
           email: formData.email,
           password: formData.password,
           role: formData.role
@@ -73,15 +106,17 @@ const Login = ({ setUserRole }) => {
           return;
         }
         
-        await axios.post('/api/auth/signup', {
+        const response = await axios.post(`${config.apiUrl}/auth/signup`, {
           email: formData.email,
           password: formData.password,
           name: formData.name,
           role: formData.role,
           department: formData.department
         });
-        
-        setIsLogin(true);
+
+        if (response.data.success) {
+          setShowOTPVerification(true);
+        }
       }
     } catch (error) {
       setError(error.response?.data?.message || 'An error occurred');
@@ -140,6 +175,61 @@ const Login = ({ setUserRole }) => {
             >
               Back to Login
             </button>
+          </form>
+        </div>
+        
+        <div className="login-image-section">
+          <img src={hostelImage} alt="Campus View" className="campus-image" />
+        </div>
+      </div>
+    );
+  }
+
+  if (showOTPVerification) {
+    return (
+      <div className="login-container">
+        <div className="login-form-section">
+          <div className="login-header">
+            <img src="/tiet-logo.png" alt="TIET Logo" className="tiet-logo" />
+            <h1>Verify Your Email</h1>
+            <p>Please enter the OTP sent to {formData.email}</p>
+          </div>
+
+          <form onSubmit={handleOTPVerification} className="login-form">
+            <div className="form-group">
+              <input
+                type="text"
+                value={formData.otp}
+                onChange={(e) => setFormData({...formData, otp: e.target.value})}
+                placeholder="Enter OTP"
+                required
+              />
+            </div>
+
+            {error && <div className="error-message">{error}</div>}
+
+            <button type="submit" className="login-button">
+              Verify OTP
+            </button>
+            <p className="resend-otp">
+              Didn't receive OTP? 
+              <button 
+                type="button" 
+                className="link-button"
+                onClick={async () => {
+                  try {
+                    await axios.post(`${config.apiUrl}/auth/resend-otp`, {
+                      email: formData.email
+                    });
+                    alert('OTP has been resent to your email');
+                  } catch (error) {
+                    setError(error.response?.data?.message || 'Error resending OTP');
+                  }
+                }}
+              >
+                Resend OTP
+              </button>
+            </p>
           </form>
         </div>
         

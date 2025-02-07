@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 import '../styles/ExperimentView.css';
 
 const ExperimentView = () => {
@@ -14,7 +15,7 @@ const ExperimentView = () => {
 
   const fetchExperiment = async () => {
     try {
-      const response = await axios.get(`/api/experiments/${courseId}/${experimentId}`);
+      const response = await axios.get(`${config.apiUrl}/experiments/${courseId}/${experimentId}`);
       setExperiment(response.data);
     } catch (error) {
       console.error('Error fetching experiment:', error);

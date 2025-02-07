@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/ExperimentManager.css';
-
+import config from '../config'
 const ExperimentManager = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const ExperimentManager = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`/api/subjects/${courseId}`, {
+      const response = await axios.get(`${config.apiUrl}/subjects/${courseId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -37,7 +37,7 @@ const ExperimentManager = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/subjects/${courseId}/experiments`, formData, {
+      const response = await axios.post(`${config.apiUrl}/subjects/${courseId}/experiments`, formData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -58,7 +58,7 @@ const ExperimentManager = () => {
   const handleDelete = async (experimentId) => {
     if (window.confirm('Are you sure you want to delete this experiment?')) {
       try {
-        await axios.delete(`/api/subjects/${courseId}/experiments/${experimentId}`, {
+        await axios.delete(`${config.apiUrl}/subjects/${courseId}/experiments/${experimentId}`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }

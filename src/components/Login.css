@@ -113,4 +113,20 @@
   color: #dc3545;
   margin-bottom: 1rem;
   text-align: center;
+}
+
+.resend-otp {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.resend-otp .link-button {
+  color: #2d3b8e;
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}
+
+.login-header p {
+  color: #666;
+  margin-top: 0.5rem;
 } 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config';
 import '../styles/Dashboard.css';
 
 const StudentDashboard = () => {
@@ -14,7 +15,7 @@ const StudentDashboard = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get('/api/departments');
+      const response = await axios.get(`${config.apiUrl}/departments`);
       setDepartments(response.data);
     } catch (error) {
       console.error('Error fetching departments:', error);
@@ -24,7 +25,7 @@ const StudentDashboard = () => {
   const fetchCourses = async () => {
     if (selectedDept && selectedBranch) {
       try {
-        const response = await axios.get(`/api/subjects/${selectedDept}/${selectedBranch}`);
+        const response = await axios.get(`${config.apiUrl}/subjects/${selectedDept}/${selectedBranch}`);
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);

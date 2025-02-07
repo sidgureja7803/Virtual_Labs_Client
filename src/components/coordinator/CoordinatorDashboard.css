@@ -1,0 +1,165 @@
+.coordinator-dashboard {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.add-course-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #2d3b8e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.add-course-btn:hover {
+  background-color: #1e2a6e;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.stat-card h3 {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  color: #2d3b8e;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.course-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+
+.course-header {
+  margin-bottom: 1rem;
+}
+
+.course-header h3 {
+  margin: 0;
+  color: #2d3b8e;
+}
+
+.course-code {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.course-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.course-stats div {
+  text-align: center;
+}
+
+.course-stats span {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.course-stats p {
+  margin: 0.25rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #2d3b8e;
+}
+
+.course-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.view-btn, .manage-btn {
+  flex: 1;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.view-btn {
+  background-color: #f8f9fa;
+  color: #2d3b8e;
+  border: 1px solid #2d3b8e;
+}
+
+.manage-btn {
+  background-color: #2d3b8e;
+  color: white;
+  border: 1px solid #2d3b8e;
+}
+
+.view-btn:hover {
+  background-color: #e9ecef;
+}
+
+.manage-btn:hover {
+  background-color: #1e2a6e;
+}
+
+.dashboard-section {
+  margin-top: 2rem;
+}
+
+.dashboard-section h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #dc3545;
+} 
