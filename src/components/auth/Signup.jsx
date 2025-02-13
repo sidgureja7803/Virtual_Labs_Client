@@ -43,8 +43,13 @@ const Signup = ({ setUserRole }) => {
     try {
       const response = await axios.post(`${config.apiUrl}/auth/signup`, formData);
       
-      if (formData.role === 'coordinator' && !showVerification) {
+      if (formData.role === 'coordinator' || formData.role === 'instructor' || formData.role === 'student' && !showVerification) {
         setShowVerification(true);
+        return;
+      }
+
+      if (formData.role === 'coordinator' || formData.role === 'instructor' || formData.role === 'student' && showVerification) {
+        navigate('/otp-verification');
         return;
       }
 

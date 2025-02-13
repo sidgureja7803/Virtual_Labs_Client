@@ -1,0 +1,137 @@
+.instructor-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  color: #2d3b8e;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.stat-card h3 {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  color: #2d3b8e;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.courses-section {
+  margin-top: 2rem;
+}
+
+.courses-section h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.course-card h3 {
+  color: #2d3b8e;
+  margin: 0 0 0.5rem;
+}
+
+.course-code {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.course-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.course-stats div {
+  text-align: center;
+}
+
+.course-stats span {
+  display: block;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.course-stats p {
+  color: #2d3b8e;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.course-actions {
+  margin-top: 1rem;
+}
+
+.manage-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2d3b8e;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.manage-btn:hover {
+  background-color: #1e2a6e;
+}
+
+@media (max-width: 768px) {
+  .instructor-dashboard {
+    padding: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+} 

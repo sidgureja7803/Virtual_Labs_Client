@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import config from '../config';
-import '../styles/Dashboard.css';
+import config from '../../config';
+import './StudentDashboard.css';
 
 const StudentDashboard = () => {
   const [departments, setDepartments] = useState([]);

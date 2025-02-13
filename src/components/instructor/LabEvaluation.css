@@ -1,0 +1,142 @@
+.lab-evaluation {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.evaluation-header {
+  margin-bottom: 2rem;
+}
+
+.evaluation-header h1 {
+  color: #2d3b8e;
+  margin: 0;
+}
+
+.submissions-list {
+  display: grid;
+  gap: 2rem;
+}
+
+.submission-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+
+.student-info {
+  margin-bottom: 1.5rem;
+}
+
+.student-info h3 {
+  color: #2d3b8e;
+  margin: 0;
+}
+
+.roll-number {
+  color: #666;
+  margin: 0.5rem 0 0;
+}
+
+.submission-content {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.submission-content section h4 {
+  color: #333;
+  margin: 0 0 0.5rem;
+}
+
+.submission-content section p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.evaluation-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100px;
+}
+
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.evaluation-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn {
+  background: white;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.save-btn {
+  background: #2d3b8e;
+  border: none;
+  color: white;
+}
+
+.save-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .lab-evaluation {
+    padding: 1rem;
+  }
+
+  .submission-card {
+    padding: 1rem;
+  }
+
+  .evaluation-actions {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+  }
+} 

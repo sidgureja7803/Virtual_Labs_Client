@@ -1,0 +1,135 @@
+.attendance-tracker {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.tracker-header h1 {
+  color: #2d3b8e;
+  margin: 0;
+}
+
+.date-picker {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.attendance-list {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.list-header {
+  display: grid;
+  grid-template-columns: 150px 1fr 200px;
+  padding: 1rem;
+  background: #f8f9fa;
+  font-weight: 500;
+  color: #333;
+}
+
+.student-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 200px;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  align-items: center;
+}
+
+.roll-number {
+  color: #666;
+}
+
+.student-name {
+  font-weight: 500;
+}
+
+.attendance-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.status-btn {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.status-btn.active {
+  border-color: #2d3b8e;
+  background: #2d3b8e;
+  color: white;
+}
+
+.tracker-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn {
+  background: white;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.save-btn {
+  background: #2d3b8e;
+  border: none;
+  color: white;
+}
+
+.save-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .attendance-tracker {
+    padding: 1rem;
+  }
+
+  .tracker-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .date-picker {
+    width: 100%;
+  }
+
+  .list-header,
+  .student-row {
+    grid-template-columns: 100px 1fr 120px;
+    font-size: 0.9rem;
+  }
+
+  .attendance-buttons {
+    flex-direction: column;
+  }
+} 

@@ -1,0 +1,169 @@
+.classroom-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.course-info h1 {
+  color: #2d3b8e;
+  margin: 0;
+}
+
+.course-code {
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.progress-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-percentage {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3b8e;
+}
+
+.progress-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.classroom-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.course-details {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.detail-item span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.detail-item p {
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0;
+}
+
+.experiments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.experiment-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.experiment-card:hover {
+  transform: translateY(-2px);
+}
+
+.experiment-card.completed {
+  border: 2px solid #28a745;
+}
+
+.experiment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.experiment-header h3 {
+  color: #2d3b8e;
+  margin: 0;
+}
+
+.completion-badge {
+  background: #28a745;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.experiment-description {
+  color: #666;
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+.experiment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.duration {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.start-btn {
+  padding: 0.5rem 1rem;
+  background-color: #2d3b8e;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.start-btn:hover {
+  background-color: #1e2a6e;
+}
+
+@media (max-width: 768px) {
+  .classroom-view {
+    padding: 1rem;
+  }
+
+  .classroom-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .progress-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+} 
