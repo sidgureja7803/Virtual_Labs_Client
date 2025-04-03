@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from './components/common/Header';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
+import LandingPage from './components/LandingPage';
 
 // Coordinator Components
 import CoordinatorDashboard from './components/coordinator/CoordinatorDashboard';
@@ -22,6 +23,9 @@ import CourseExplorer from './components/student/CourseExplorer';
 import ClassroomView from './components/student/ClassroomView';
 import ExperimentRunner from './components/student/ExperimentRunner';
 
+// HoD Components
+import HodDashboard from './components/hod/HodDashboard';
+
 import './App.css';
 
 function App() {
@@ -37,58 +41,87 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Header userRole={userRole} />
         <Routes>
-          {/* Auth Routes */}
+          {/* Public Routes */}
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login setUserRole={setUserRole} />} />
           <Route path="/signup" element={<Signup setUserRole={setUserRole} />} />
 
-          {/* Coordinator Routes */}
-          <Route 
-            path="/coordinator/*" 
-            element={
-              <ProtectedRoute allowedRoles={['coordinator']}>
+          {/* Protected Dashboard Routes with Header */}
+          <Route path="/dashboard/*" element={
+            <>
+              <Header userRole={userRole} />
+              {userRole && (
                 <Routes>
-                  <Route path="/" element={<CoordinatorDashboard />} />
-                  <Route path="/manage-instructors" element={<ManageInstructors />} />
-                  <Route path="/courses" element={<CourseManagement />} />
-                  <Route path="/experiments/:courseId" element={<ExperimentManager />} />
-                </Routes>
-              </ProtectedRoute>
-            }
-          />
+                  {/* HoD Routes */}
+                  <Route 
+                    path="/hod/*" 
+                    element={
+                      <ProtectedRoute allowedRoles={['hod']}>
+                        <Routes>
+                          <Route path="/" element={<HodDashboard />} />
+                        </Routes>
+                      </ProtectedRoute>
+                    }
+                  />
 
-          {/* Instructor Routes */}
-          <Route 
-            path="/instructor/*" 
-            element={
-              <ProtectedRoute allowedRoles={['instructor']}>
-                <Routes>
-                  <Route path="/" element={<InstructorDashboard />} />
-                  <Route path="/classrooms" element={<ClassroomManager />} />
-                  <Route path="/attendance/:classroomId" element={<AttendanceTracker />} />
-                  <Route path="/evaluation/:classroomId" element={<LabEvaluation />} />
-                </Routes>
-              </ProtectedRoute>
-            }
-          />
+                  {/* Coordinator Routes */}
+                  <Route 
+                    path="/coordinator/*" 
+                    element={
+                      <ProtectedRoute allowedRoles={['coordinator']}>
+                        <Routes>
+                          <Route path="/" element={<CoordinatorDashboard />} />
+                          <Route path="/manage-instructors" element={<ManageInstructors />} />
+                          <Route path="/courses" element={<CourseManagement />} />
+                          <Route path="/experiments/:courseId" element={<ExperimentManager />} />
+                        </Routes>
+                      </ProtectedRoute>
+                    }
+                  />
 
-          {/* Student Routes */}
-          <Route 
-            path="/student/*" 
-            element={
-              <ProtectedRoute allowedRoles={['student']}>
-                <Routes>
-                  <Route path="/" element={<StudentDashboard />} />
-                  <Route path="/courses" element={<CourseExplorer />} />
-                  <Route path="/classroom/:classroomId" element={<ClassroomView />} />
-                  <Route path="/experiment/:experimentId" element={<ExperimentRunner />} />
-                </Routes>
-              </ProtectedRoute>
-            }
-          />
+                  {/* Instructor Routes */}
+                  <Route 
+                    path="/instructor/*" 
+                    element={
+                      <ProtectedRoute allowedRoles={['instructor']}>
+                        <Routes>
+                          <Route path="/" element={<InstructorDashboard />} />
+                          <Route path="/classrooms" element={<ClassroomManager />} />
+                          <Route path="/attendance/:classroomId" element={<AttendanceTracker />} />
+                          <Route path="/evaluation/:classroomId" element={<LabEvaluation />} />
+                        </Routes>
+                      </ProtectedRoute>
+                    }
+                  />
 
-          <Route path="/" element={<Navigate to="/login" />} />
+                  {/* Student Routes */}
+                  <Route 
+                    path="/student/*" 
+                    element={
+                      <ProtectedRoute allowedRoles={['student']}>
+                        <Routes>
+                          <Route path="/" element={<StudentDashboard />} />
+                          <Route path="/courses" element={<CourseExplorer />} />
+                          <Route path="/classroom/:classroomId" element={<ClassroomView />} />
+                          <Route path="/experiment/:experimentId" element={<ExperimentRunner />} />
+                        </Routes>
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              )}
+            </>
+          } />
+          
+          {/* Redirect old routes to dashboard routes */}
+          <Route path="/hod" element={<Navigate to="/dashboard/hod" />} />
+          <Route path="/coordinator" element={<Navigate to="/dashboard/coordinator" />} />
+          <Route path="/instructor" element={<Navigate to="/dashboard/instructor" />} />
+          <Route path="/student" element={<Navigate to="/dashboard/student" />} />
+          
+          {/* Catch-all route */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </Router>

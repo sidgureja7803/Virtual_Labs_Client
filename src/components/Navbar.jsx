@@ -1,33 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../assets/Virtual-labs.png';
 
-const Navbar = () => {
-  const [userCount, setUserCount] = useState(0);
+const Navbar = ({ onAboutClick, onDepartmentsClick, onContactClick }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    // Simulated user count - Replace with actual API call
-    setUserCount(Math.floor(Math.random() * 10000) + 1000);
-  }, []);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <nav className="navbar">
-      <div className="nav-container">
-        <Link to="/" className="nav-logo">
-          <img src="/name.png" alt="Virtual Labs Logo" className="logo-img" />
+      <div className="navbar-container">
+        <Link to="/" className="navbar-logo">
+          <img src={logo} alt="Virtual Labs Logo" />
+          <span>Virtual Labs</span>
         </Link>
-        
-        <div className="nav-menu">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/about" className="nav-link">About Us</Link>
-          <Link to="/contact" className="nav-link">Contact Us</Link>
-          <Link to="/experiments" className="nav-link">Experiments</Link>
+
+        <div className="menu-icon" onClick={toggleMenu}>
+          <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'}`} />
         </div>
 
-        <div className="user-count">
-          <span className="count-label">Active Users: </span>
-          <span className="count-number">{userCount}</span>
-        </div>
+        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">Home</Link>
+          </li>
+          <li className="nav-item">
+            <button onClick={onAboutClick} className="nav-link">About</button>
+          </li>
+          <li className="nav-item">
+            <button onClick={onDepartmentsClick} className="nav-link">Departments</button>
+          </li>
+          <li className="nav-item">
+            <button onClick={onContactClick} className="nav-link">Contact</button>
+          </li>
+          <li className="nav-item">
+            <Link to="/login" className="nav-link login-btn">Login</Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );

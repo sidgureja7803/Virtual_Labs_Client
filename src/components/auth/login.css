@@ -1,0 +1,247 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+/* Login Container */
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+/* Left Section - Image */
+.login-left {
+  width: 45%;
+  background: linear-gradient(to bottom, rgba(255, 90, 90, 0.8), rgba(255, 160, 160, 0.8)),
+              url('../../assets/Tiet-Library.png') no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.welcome-text {
+  margin-bottom: 2rem;
+}
+
+.welcome-text h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-text h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.welcome-text h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-text p {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Right Section - Form */
+.login-right {
+  width: 55%;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Logos */
+.header-logos {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.tiet-logo, .uq-logo {
+  height: 35px;
+}
+
+/* Form Container */
+.login-form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 450px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.login-header {
+  margin-bottom: 2rem;
+}
+
+.login-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.login-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 100%; /* Make sure the container doesn't limit width */
+    max-width: 400px; /* Adjust this if needed */
+  }
+  
+  .form-group input {
+    width: 300px !important; /* Force the width */
+    max-width: 300px !important; /* Ensure it doesn't shrink */
+    padding: 0.75rem;
+    border: 4px solid black;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: white;
+    background-color: transparent;
+    box-sizing: border-box; /* Ensures padding doesn't add extra width */
+  }
+  
+  .form-group input {
+    color: black;
+    outline: none;
+  }
+  
+
+
+.password-field input {
+  width: 100%;
+  max-width: 300px;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.helper-text {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Role Selection */
+.role-selection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.role-button {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  background: transparent;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.role-button.active {
+  background-color: #CA0202;
+  color: white;
+  border-color: #CA0202;
+}
+
+/* Buttons and Links */
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #CA0202;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.forgot-password {
+  color: #CA0202;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: block;
+  text-align: right;
+}
+
+.signup-link {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+.signup-link a {
+  color: #CA0202;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .login-container {
+    flex-direction: column;
+  }
+  
+  .login-left {
+    display: none;
+  }
+  
+  .login-right {
+    padding: 2rem;
+  }
+}
