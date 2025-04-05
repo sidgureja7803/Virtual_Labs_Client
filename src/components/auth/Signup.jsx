@@ -4,7 +4,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Signup.css';
 import VLOGO from '../../assets/Virtual-labs.png';
 import tietLogo from '../../assets/Tiet-Logo.png';
-
 import hostelImage from '../../assets/Hostel-M.jpg';
 
 const Signup = () => {
@@ -15,11 +14,11 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-
   const validatePassword = (password) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
