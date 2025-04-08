@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 .instructor-dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .dashboard-header {
@@ -9,129 +12,174 @@
 }
 
 .dashboard-header h1 {
-  color: #2d3b8e;
   font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
   margin: 0;
+}
+
+.dashboard-header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0.5rem 0 0 0;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .stat-card {
-  background: white;
+  background: #fff;
+  border-radius: 12px;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
 }
 
-.stat-card h3 {
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.stat-info h3 {
+  font-size: 0.9rem;
   color: #666;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
 }
 
-.stat-card p {
-  color: #2d3b8e;
-  font-size: 2rem;
-  font-weight: bold;
+.stat-info p {
+  font-size: 1.5rem;
+  color: #1a1a1a;
   margin: 0;
+  font-weight: 600;
 }
 
-.courses-section {
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.chart-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.chart-section h2 {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+}
+
+.recent-activity {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.recent-activity h2 {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.activity-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+.activity-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+}
+
+.activity-time {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
-.courses-section h2 {
-  color: #333;
-  margin-bottom: 1.5rem;
-}
-
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.course-card {
-  background: white;
-  padding: 1.5rem;
+.action-button {
+  padding: 0.75rem 1.5rem;
+  background: #cc0000;
+  color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.course-card h3 {
-  color: #2d3b8e;
-  margin: 0 0 0.5rem;
-}
-
-.course-code {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.course-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin: 1rem 0;
-  padding: 1rem 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-}
-
-.course-stats div {
-  text-align: center;
-}
-
-.course-stats span {
-  display: block;
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 0.25rem;
-}
-
-.course-stats p {
-  color: #2d3b8e;
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin: 0;
-}
-
-.course-actions {
-  margin-top: 1rem;
-}
-
-.manage-btn {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #2d3b8e;
-  color: white;
-  text-align: center;
   text-decoration: none;
-  border-radius: 4px;
+  font-weight: 500;
   transition: background-color 0.2s;
 }
 
-.manage-btn:hover {
-  background-color: #1e2a6e;
+.action-button:hover {
+  background: #990000;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
   .instructor-dashboard {
     padding: 1rem;
   }
-
+  
   .stats-grid {
     grid-template-columns: 1fr;
   }
-
-  .courses-grid {
-    grid-template-columns: 1fr;
+  
+  .quick-actions {
+    flex-direction: column;
+  }
+  
+  .action-button {
+    width: 100%;
+    text-align: center;
   }
 } 

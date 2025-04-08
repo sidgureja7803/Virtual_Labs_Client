@@ -1,64 +1,51 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
+import { FaInstagram, FaTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa';
 
-const Footer = forwardRef((props, ref) => {
+const Footer = () => {
   return (
-    <footer className="footer" ref={ref}>
+    <footer className="footer">
       <div className="footer-content">
-        <div className="footer-section">
-          <h3>About Us</h3>
+        <div className="footer-section about-section">
+          <h3>COE | TIET-UQ</h3>
           <p>
-            Thapar Virtual Labs is a pioneering initiative by Thapar Institute of Engineering & Technology 
-            to provide remote access to labs in various engineering disciplines. Our platform enables students 
-            to perform experiments and learn from anywhere in the world.
+            At Thapar University, we are committed to pioneering solutions in sustainable energy, AI,
+            smart cities. This proposal outlines our vision for addressing global challenges through innovative
+            research and collaboration. Join us as we work towards creating impactful, real-world solutions
+            for a sustainable future.
           </p>
-        </div>
-        
-        <div className="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/departments">Departments</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/feedback">Feedback</Link></li>
-          </ul>
-        </div>
-        
-        <div className="footer-section">
-          <h3>Contact Info</h3>
-          <ul className="contact-info">
-            <li>
-              <i className="fas fa-map-marker-alt"></i>
-              Thapar Institute of Engineering & Technology, Patiala, Punjab, India - 147004
-            </li>
-            <li>
-              <i className="fas fa-phone"></i>
-              +91-175-2393021
-            </li>
-            <li>
-              <i className="fas fa-envelope"></i>
-              virtuallabs@thapar.edu
-            </li>
-          </ul>
-        </div>
-        
-        <div className="footer-section">
-          <h3>Follow Us</h3>
           <div className="social-links">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-facebook"></i>
+            <a href="https://instagram.com/thaparedu" target="_blank" rel="noopener noreferrer">
+              <FaInstagram />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-twitter"></i>
+            <a href="https://twitter.com/thaparedu" target="_blank" rel="noopener noreferrer">
+              <FaTwitter />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-linkedin"></i>
+            <a href="https://linkedin.com/school/thapar-university" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-instagram"></i>
+            <a href="https://facebook.com/thaparedu" target="_blank" rel="noopener noreferrer">
+              <FaFacebook />
             </a>
           </div>
+        </div>
+        
+        <div className="footer-section resource-section">
+          <h3>Resource</h3>
+          <ul>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/team">Our Team</Link></li>
+            <li><Link to="/sitemap">SiteMap</Link></li>
+          </ul>
+        </div>
+        
+        <div className="footer-section legal-section">
+          <h3>COE | TIET-UQ</h3>
+          <ul>
+            <li><Link to="/terms">Terms and Conditions</Link></li>
+            <li><Link to="/privacy">Privacy Policy</Link></li>
+          </ul>
         </div>
       </div>
       
@@ -67,6 +54,6 @@ const Footer = forwardRef((props, ref) => {
       </div>
     </footer>
   );
-});
+};
 
 export default Footer; 

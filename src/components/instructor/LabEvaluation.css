@@ -1,7 +1,8 @@
 .lab-evaluation {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .evaluation-header {
@@ -9,117 +10,161 @@
 }
 
 .evaluation-header h1 {
-  color: #2d3b8e;
-  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
 }
 
-.submissions-list {
+.submission-stats {
   display: grid;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.submission-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.stat {
+  background: #fff;
+  border-radius: 12px;
   padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.student-info {
-  margin-bottom: 1.5rem;
+.stat span {
+  font-size: 0.9rem;
+  color: #666;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
-.student-info h3 {
-  color: #2d3b8e;
+.stat p {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  font-weight: 600;
   margin: 0;
 }
 
-.roll-number {
+.submissions-table {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: #666;
-  margin: 0.5rem 0 0;
+  border-bottom: 2px solid #f1f1f1;
 }
 
-.submission-content {
-  display: grid;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid #eee;
+td {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  border-bottom: 1px solid #f1f1f1;
 }
 
-.submission-content section h4 {
-  color: #333;
-  margin: 0 0 0.5rem;
-}
-
-.submission-content section p {
-  color: #666;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.evaluation-form {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group label {
-  color: #333;
+.status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
-.form-group input {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-  width: 100px;
+.status.yes {
+  background: #e6f4ea;
+  color: #1e7e34;
 }
 
-.form-group textarea {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-  resize: vertical;
+.status.no {
+  background: #fbe9e7;
+  color: #d32f2f;
 }
 
-.evaluation-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 2rem;
+.status.evaluated {
+  background: #e3f2fd;
+  color: #1976d2;
 }
 
-.cancel-btn,
-.save-btn {
-  padding: 0.75rem 2rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
+.status.pending {
+  background: #fff3e0;
+  color: #f57c00;
 }
 
-.cancel-btn {
-  background: white;
-  border: 1px solid #ddd;
-  color: #666;
-}
-
-.save-btn {
-  background: #2d3b8e;
+.view-btn,
+.grade-btn {
+  padding: 0.5rem 1rem;
   border: none;
-  color: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-right: 0.5rem;
 }
 
-.save-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+.view-btn {
+  background: #f1f1f1;
+  color: #1a1a1a;
+}
+
+.view-btn:hover {
+  background: #e1e1e1;
+}
+
+.grade-btn {
+  background: #cc0000;
+  color: #fff;
+}
+
+.grade-btn:hover {
+  background: #990000;
+}
+
+.submission-chart {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container {
+  height: 24px;
+  background: #f1f1f1;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.chart-fill {
+  height: 100%;
+  background: #cc0000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: width 0.3s ease;
+}
+
+.submission-chart p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -127,16 +172,21 @@
     padding: 1rem;
   }
 
-  .submission-card {
+  .submission-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .submissions-table {
     padding: 1rem;
   }
 
-  .evaluation-actions {
-    flex-direction: column;
+  th, td {
+    padding: 0.75rem;
   }
 
-  .cancel-btn,
-  .save-btn {
-    width: 100%;
+  .view-btn,
+  .grade-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 } 

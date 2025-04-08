@@ -2,64 +2,74 @@
 .signup-container {
   display: flex;
   min-height: 100vh;
-  background-color: #fff;
+  background-position: center;
+  background-size: cover;
 }
 
 /* Sidebar Styles */
 .signup-sidebar {
   width: 30%;
-  background-color: #730021;
-  padding: 3rem 2rem;
+  background-color: #cc0000;
   color: white;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .sidebar-logo {
-  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
 }
 
 .sidebar-logo img {
-  width: 180px;
+  width: 60px;
   height: auto;
-  margin-bottom: 1rem;
+}
+
+.sidebar-logo-text {
+  margin-left: 10px;
 }
 
 .sidebar-logo-text p {
   font-size: 1.2rem;
-  opacity: 0.9;
+  font-weight: bold;
+  margin: 0;
 }
 
 .sidebar-steps {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   position: relative;
-  padding-left: 2rem;
+  padding-left: 25px;
 }
 
 .progress-bar {
   position: absolute;
-  left: 0;
   top: 0;
   bottom: 0;
+  left: 10px;
   width: 4px;
   background-color: rgba(255, 255, 255, 0.2);
 }
 
 .progress-fill {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
+  height: 0%;
   background-color: white;
-  transition: height 0.3s ease;
+  transition: height 0.3s ease-in-out;
 }
 
 .step-item {
-  position: relative;
-  padding-left: 2rem;
-  margin-bottom: 3rem;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
   opacity: 0.5;
   transition: opacity 0.3s ease;
 }
@@ -68,69 +78,94 @@
   opacity: 1;
 }
 
-.step-item::before {
-  content: '';
-  position: absolute;
-  left: -2rem;
-  top: 0.5rem;
-  width: 16px;
-  height: 16px;
-  background-color: white;
+.step-icon {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  transform: translateX(-6px);
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.step-item.active .step-icon {
+  background-color: white;
+  color: #cc0000;
 }
 
 .step-text h4 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  font-size: 1.1rem;
 }
 
 .step-text p {
+  margin: 5px 0 0;
   font-size: 0.9rem;
   opacity: 0.8;
 }
 
+.step-connector {
+  width: 2px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-left: 39px;
+}
+
 /* Main Content Styles */
 .signup-main-content {
-  width: 70%;
-  padding: 3rem 4rem;
+  flex: 1;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .header-logos {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 4rem;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
-.tiet-logo {
+.tiet-uq-logos {
+  display: flex;
+  align-items: center;
+}
+
+.tiet-logo, .uq-logo {
   height: 60px;
-  width: auto;
+  margin-right: 1rem;
 }
 
 .signup-form-wrapper {
-  max-width: 500px;
-  margin: 0 auto;
+  max-width: 450px;
   width: 100%;
 }
 
 .signup-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .signup-header h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #333;
   margin-bottom: 0.5rem;
 }
 
+.signup-header p {
+  color: #666;
+  margin: 0;
+}
+
 .signup-form {
-  background: white;
+  background-color: white;
+  border-radius: 10px;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .form-group {
@@ -140,21 +175,37 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
+  font-weight: 500;
   color: #333;
 }
 
-.form-group input {
+.form-group input, 
+.form-group select,
+.form-group textarea {
   width: 100%;
-  padding: 1rem;
+  padding: 0.75rem;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 5px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s;
 }
 
-.form-group input:focus {
-  border-color: #730021;
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-group input:focus, 
+.form-group select:focus,
+.form-group textarea:focus {
   outline: none;
+  border-color: #cc0000;
+}
+
+.helper-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
 }
 
 .password-field {
@@ -163,96 +214,132 @@
 
 .password-toggle {
   position: absolute;
-  right: 1rem;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   color: #666;
 }
 
-/* Form Buttons */
+.error-message, .signup-error {
+  color: #cc0000;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
 .form-buttons {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
   margin-top: 2rem;
 }
 
-.back-button,
-.signup-button {
-  flex: 1;
-  padding: 1rem;
-  border: none;
-  border-radius: 8px;
+.signup-button, .back-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.back-button {
-  background-color: #f0f0f0;
-  color: #333;
+  transition: background-color 0.3s;
 }
 
 .signup-button {
-  background-color: #730021;
+  background-color: #cc0000;
   color: white;
-}
-
-.back-button:hover {
-  background-color: #e0e0e0;
+  border: none;
+  flex: 1;
 }
 
 .signup-button:hover {
-  background-color: #5a001a;
+  background-color: #a10000;
 }
 
-/* Error Messages */
-.error-message {
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
+.back-button {
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #ddd;
+  margin-right: 1rem;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
 }
 
 .login-link {
   text-align: center;
   margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .login-link a {
-  color: #730021;
+  color: #cc0000;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .login-link a:hover {
   text-decoration: underline;
 }
 
-/* Icons */
-.email-icon::before {
-  content: '✉️';
+.verification-step {
+  text-align: center;
 }
 
-.user-icon::before {
-  content: '👤';
+.verification-step p {
+  margin-bottom: 1.5rem;
+  color: #555;
 }
 
-.verify-icon::before {
-  content: '✓';
+.verification-step strong {
+  color: #333;
 }
 
-/* Responsive Styles */
-@media (max-width: 992px) {
+.resend-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.resend-button {
+  background: none;
+  border: none;
+  color: #cc0000;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.resend-button:hover {
+  text-decoration: underline;
+}
+
+.resend-code span {
+  color: #666;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
   .signup-container {
     flex-direction: column;
   }
   
   .signup-sidebar {
     width: 100%;
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .signup-main-content {
-    width: 100%;
-    padding: 2rem;
+    padding: 1.5rem;
+  }
+  
+  .header-logos {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tiet-uq-logos {
+    margin-bottom: 1rem;
   }
 }

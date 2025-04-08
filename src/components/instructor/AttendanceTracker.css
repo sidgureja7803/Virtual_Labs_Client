@@ -1,7 +1,8 @@
 .attendance-tracker {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .tracker-header {
@@ -12,100 +13,200 @@
 }
 
 .tracker-header h1 {
-  color: #2d3b8e;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1a1a1a;
   margin: 0;
 }
 
-.date-picker {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.attendance-list {
-  background: white;
+.date-selector input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e1e1e1;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  overflow: hidden;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  background: #fff;
 }
 
-.list-header {
+.attendance-stats {
   display: grid;
-  grid-template-columns: 150px 1fr 200px;
-  padding: 1rem;
-  background: #f8f9fa;
-  font-weight: 500;
-  color: #333;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.student-row {
-  display: grid;
-  grid-template-columns: 150px 1fr 200px;
-  padding: 1rem;
-  border-top: 1px solid #eee;
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
   align-items: center;
 }
 
-.roll-number {
-  color: #666;
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }
 
-.student-name {
+.stat-icon.present {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.stat-icon.absent {
+  background: #fbe9e7;
+  color: #d32f2f;
+}
+
+.stat-icon.total {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.stat-info h3 {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 0.5rem 0;
   font-weight: 500;
 }
 
-.attendance-buttons {
-  display: flex;
-  gap: 0.5rem;
+.stat-info p {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 600;
 }
 
-.status-btn {
+.attendance-table {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+  border-bottom: 2px solid #f1f1f1;
+}
+
+td {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.attendance-rate {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rate-bar {
   flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+  height: 8px;
+  background: #f1f1f1;
   border-radius: 4px;
-  background: white;
+  overflow: hidden;
+}
+
+.rate-fill {
+  height: 100%;
+  background: #cc0000;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.attendance-rate span {
+  font-size: 0.8rem;
+  color: #666;
+  min-width: 40px;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status.present {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.status.absent {
+  background: #fbe9e7;
+  color: #d32f2f;
+}
+
+.toggle-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.status-btn.active {
-  border-color: #2d3b8e;
-  background: #2d3b8e;
-  color: white;
+.toggle-btn.present {
+  background: #fbe9e7;
+  color: #d32f2f;
 }
 
-.tracker-actions {
+.toggle-btn.present:hover {
+  background: #ffcdd2;
+}
+
+.toggle-btn.absent {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.toggle-btn.absent:hover {
+  background: #c8e6c9;
+}
+
+.attendance-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
   margin-top: 2rem;
 }
 
-.cancel-btn,
 .save-btn {
   padding: 0.75rem 2rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.cancel-btn {
-  background: white;
-  border: 1px solid #ddd;
-  color: #666;
-}
-
-.save-btn {
-  background: #2d3b8e;
+  background: #cc0000;
+  color: #fff;
   border: none;
-  color: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.save-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+.save-btn:hover {
+  background: #990000;
 }
 
 @media (max-width: 768px) {
@@ -119,17 +220,24 @@
     gap: 1rem;
   }
 
-  .date-picker {
+  .attendance-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .attendance-table {
+    padding: 1rem;
+  }
+
+  th, td {
+    padding: 0.75rem;
+  }
+
+  .toggle-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .save-btn {
     width: 100%;
-  }
-
-  .list-header,
-  .student-row {
-    grid-template-columns: 100px 1fr 120px;
-    font-size: 0.9rem;
-  }
-
-  .attendance-buttons {
-    flex-direction: column;
   }
 } 

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
 import tietLogo from '../../assets/Tiet-Logo.png';
 import uqLogo from '../../assets/Name.png';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -14,6 +16,14 @@ const Login = () => {
   const [error, setError] = useState('');
   const [selectedRole, setSelectedRole] = useState('student');
   const [passwordError, setPasswordError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  useEffect(() => {
+    // Display success message if coming from successful registration
+    if (location.state?.message) {
+      setSuccessMessage(location.state.message);
+    }
+  }, [location]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,8 +31,6 @@ const Login = () => {
     setError(''); // Clear error when user types
 
     if (name === "password") {
-      setFormData({ ...formData, password: value });
-      
       // Password validation regex
       const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       
@@ -31,14 +39,40 @@ const Login = () => {
       } else {
         setPasswordError("");
       }
-    } else {
-      setFormData({ ...formData, [name]: value });
     }
   };
 
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
     setError(''); // Clear error when role changes
+  };
+
+  const checkRegistrationStatus = async (email) => {
+    // In a real app, this would be an API call to check registration status
+    // For demo, we'll simulate by checking localStorage
+    
+    // Check if there's partial registration data for this email
+    const storedEmail = localStorage.getItem('userEmail');
+    
+    if (storedEmail === email) {
+      const step = localStorage.getItem('registrationStep');
+      if (step) {
+        return {
+          isRegistered: false,
+          completedStep: parseInt(step),
+          email: email
+        };
+      }
+    }
+    
+    // Mock check if user is fully registered
+    // For demo purposes, we'll consider these emails as fully registered
+    const registeredEmails = ['test@thapar.edu', 'admin@thapar.edu', 'instructor@thapar.edu'];
+    return {
+      isRegistered: registeredEmails.includes(email),
+      completedStep: 3,
+      email: email
+    };
   };
 
   const handleSubmit = async (e) => {
@@ -51,14 +85,42 @@ const Login = () => {
     }
 
     try {
-      // Here you would make your API call to verify credentials
-      // For now, we'll simulate a response
+      // First check registration status
+      const registrationStatus = await checkRegistrationStatus(formData.email);
+      
+      if (!registrationStatus.isRegistered) {
+        // User has started but not completed registration
+        if (registrationStatus.completedStep < 3) {
+          setError(`You need to complete your registration process.`);
+          setTimeout(() => {
+            navigate('/signup');
+          }, 2000);
+          return;
+        }
+      }
+      
+      // If fully registered, proceed with login
       const response = await mockLoginAPI(formData.email, formData.password, selectedRole);
       
       if (response.success) {
-        // Handle successful login
-        console.log('Login successful');
-        // You can redirect or update state here
+        // Set tokens and user role in localStorage
+        localStorage.setItem('token', 'mock-jwt-token');
+        localStorage.setItem('userRole', selectedRole);
+        
+        // Redirect based on role
+        switch (selectedRole) {
+          case 'coordinator':
+            navigate('/coordinator');
+            break;
+          case 'instructor':
+            navigate('/instructor');
+            break;
+          case 'student':
+            navigate('/student');
+            break;
+          default:
+            navigate('/');
+        }
       } else {
         setError('Invalid credentials');
       }
@@ -102,6 +164,12 @@ const Login = () => {
             <h1>Sign in</h1>
             <p>Welcome Back!</p>
           </div>
+
+          {successMessage && (
+            <div className="success-message">
+              {successMessage}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
 
@@ -159,7 +227,7 @@ const Login = () => {
 
             {error && <div className="error-message">{error}</div>}
 
-            <a href="#" className="forgot-password">Forgot password?</a>
+            <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
 
             <button type="submit" className="login-button">
               Login
